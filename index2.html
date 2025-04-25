@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>銘神建設株式会社</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vanta@latest/dist/vanta.globe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans JP', sans-serif;
+      height: 100%;
+      overflow-x: hidden;
+      color: white;
+      scroll-behavior: smooth;
+      background-color: transparent;
+    }
+
+    #vanta-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+    }
+
+    nav {
+      position: fixed;
+      top: 20px;
+      right: 30px;
+      z-index: 1000;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+    }
+
+    .nav-toggle span {
+      background: white;
+      height: 3px;
+      margin: 4px 0;
+      width: 25px;
+      border-radius: 2px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 8px;
+    }
+
+    nav button {
+      background: rgba(255, 255, 255, 0.9);
+      color: #111;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.3);
+      transition: transform 0.2s ease;
+    }
+
+    nav button:hover {
+      background: #003366;
+      color: white;
+      transform: scale(1.05);
+    }
+
+    header {
+      text-align: center;
+      padding: 100px 20px 40px;
+    }
+
+    header img {
+      width: 120px;
+      margin-bottom: 20px;
+    }
+
+    header h1 {
+  font-family: 'Noto Serif JP', serif;
+      font-size: 3em;
+      margin: 0;
+    }
+
+    header p {
+      font-size: 1.3em;
+      opacity: 0.9;
+    }
+
+    .section {
+      max-width: 900px;
+      margin: 40px auto;
+      background: rgba(255, 255, 255, 0.1);
+      color: #fff;
+      padding: 30px;
+      border-radius: 15px;
+      backdrop-filter: blur(10px);
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 0.8s ease-out;
+    }
+
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .section h2 {
+  font-family: 'Noto Serif JP', serif;
+      font-size: 1.8em;
+      margin-bottom: 15px;
+    }
+
+    footer {
+      text-align: center;
+      padding: 30px;
+      font-size: 0.9em;
+      background: rgba(255,255,255,0.1);
+      color: #ffffff;
+      margin-top: 40px;
+    }
+
+    @media (max-width: 600px) {
+      .nav-buttons {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+      }
+
+      .nav-buttons.active {
+        display: flex;
+      }
+
+      .nav-toggle {
+        display: flex;
+      }
+    }
+  
+    html {
+      font-size: clamp(14px, 1.2vw, 18px);
+    }
+
+    body {
+      font-family: 'Noto Sans JP', sans-serif;
+      line-height: 1.75;
+    }
+
+    header h1 {
+      font-size: clamp(28px, 4vw, 42px);
+      font-family: 'Noto Serif JP', serif;
+    }
+
+    .section h2 {
+      font-size: clamp(20px, 2.5vw, 30px);
+      font-family: 'Noto Serif JP', serif;
+    }
+
+    nav button {
+      font-size: clamp(12px, 1.1vw, 16px);
+    }
+
+    @media (max-width: 600px) {
+      header {
+        padding: 80px 20px 30px;
+      }
+
+      .section {
+        padding: 20px;
+      }
+
+      nav button {
+        padding: 10px 12px;
+      }
+
+      header h1 {
+        font-size: 28px;
+      }
+
+      .section h2 {
+        font-size: 20px;
+      }
+    }
+
+</style>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="vanta-bg"></div>
+  <nav>
+    <div class="nav-toggle" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+    <div class="nav-buttons" id="navButtons">
+      <button onclick="switchLang('ja')">日本語</button>
+      <button onclick="switchLang('zh')">中文</button>
+      <button onclick="switchLang('en')">English</button>
+    </div>
+  </nav>
+
+  <header>
+    <img src="logo.jpg" alt="会社ロゴ" />
+    <h1>銘神建設株式会社</h1>
+    <p id="tagline">安心・信頼・高品質な建築サービスを神戸から</p>
+  </header>
+
+  <div class="section">
+    <h2 id="aboutTitle">会社概要</h2>
+    <p id="aboutText">
+      銘神建設株式会社は、神戸市を拠点に、住宅・不動産リフォーム、内外装設計施工、建築資材販売、電気・水道工事、不動産売買・仲介・賃貸・管理、労働者派遣事業など、多岐にわたる建設関連サービスを展開しております。<br><br>
+      会社沿革としては、2024年3月に設立され、同年5月には不動産リフォームの請負業務を本格的にスタートいたしました。<br><br>
+      2025年2月期の売上高は923万円を達成し、堅実かつ着実な成長を遂げております。<br><br>
+      設立以来、お客様との信頼関係を第一に、質の高い施工技術と誠実な対応で、多くの案件を手がけてまいりました。<br>
+      小規模から中規模の案件を中心に、地域に密着した柔軟かつ迅速な対応を重視し、施工品質・コストパフォーマンス・スピード感においてご満足いただける体制を整えております。<br>
+      今後も神戸を中心に関西圏全域へとサービスを拡大し、「信頼される建設パートナー」として地域社会に貢献してまいります。
+    </p>
+  </div>
+
+  <div class="section">
+    <h2 id="serviceTitle">主な事業内容</h2>
+    <ul id="serviceList">
+      <li>不動産リフォーム・内装工事</li>
+      <li>建築コンサルティング</li>
+      <li>材料・設備の販売および輸出</li>
+      <li>インテリア設計・施工</li>
+      <li>不動産売買、仲介、賃貸、管理</li>
+      <li>労働者派遣事業</li>
+    </ul>
+  </div>
+
+  <div class="section">
+    <h2 id="contactTitle">お問い合わせ</h2>
+    <p>
+      【本社】<br>
+住所：〒653-0875 兵庫県神戸市長田区丸山町1-6-19<br />
+      電話：078-954-6517 / 080-4498-7896<br />
+      メール：qqzhaofuming@gmail.com<br><br>【神戸支店】<br>住所：〒652-0804 兵庫県神戸市兵庫区中道通4丁目2-33</p>
+    <p style="margin-top:20px;">
+      以下のボタンをクリックして、メールソフトで直接ご連絡ください。
+    </p>
+    <button type="button" onclick="showEmailPopup()" style="margin-top:10px;padding:12px 24px;font-size:16px;font-weight:bold;border:none;border-radius:8px;background:white;color:#0f2027;cursor:pointer;">
+      メールで問い合わせる
+    </button>
+  </div>
+
+  <footer>
+    <div class="map-block">
+      <h2 style="text-align:center;color:#fff;">アクセスマップ</h2>
+      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d580.0369646802598!2d135.1646530489101!3d34.67529096431401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60008f738b5979f3%3A0x1ac3ec7fdf98ad22!2z5YWQ56ul55m66YGU5pSv5o-0IOWwj-OBleOBqueZguiCsuWckuOBsuOCiOOBk-OBo-OBkw!5e0!3m2!1szh-CN!2sjp!4v1745551851132!5m2!1szh-CN!2sjp" width="100%" height="400" style="border:0;border-radius:12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </div>
+    &copy; 2024 銘神建設株式会社 - Meishin Construction Co., Ltd.
+  </footer>
+
+  <script>
+    const translations = {
+      ja: {
+        tagline: "安心・信頼・高品質な建築サービスを神戸から",
+        aboutTitle: "会社概要",
+        aboutText: `銘神建設株式会社は、神戸市を拠点に、住宅・不動産リフォーム、内外装設計施工、建築資材販売、電気・水道工事など、幅広いサービスを提供しております。<br><br>
+        会社沿革としては、2024年3月に設立され、同年5月には不動産リフォームの請負業務を本格的にスタートいたしました。<br><br>
+        2025年2月期の売上高は923万円を達成し、堅実かつ着実な成長を遂げております。<br><br>
+        設立以来、お客様との信頼関係を第一に、質の高い施工技術と誠実な対応で、多くの案件を手がけてまいりました。<br>
+        小規模から中規模の案件を中心に、地域に密着したサービスを展開し、施工品質・コストパフォーマンス・スピード感においてご満足いただける体制を整えております。<br>
+        今後も神戸を中心に関西圏全域へとサービスを拡大し、「信頼される建設パートナー」として地域社会に貢献してまいります。`,
+        serviceTitle: "主な事業内容",
+        serviceList: [
+          "不動産リフォーム・内装工事",
+          "建築コンサルティング",
+          "材料・設備の販売および輸出",
+          "インテリア設計・施工",
+          "不動産売買、仲介、賃貸、管理",
+          "労働者派遣事業"
+        ],
+        contactTitle: "お問い合わせ"
+      },
+      zh: {
+        tagline: "从神户出发，提供安心、信赖、高质量的建筑服务",
+        aboutTitle: "公司简介",
+        aboutText: `銘神建設株式会社以神户市为据点，专注于住宅与不动产翻修、内外装设计施工、建筑材料销售、水电工程、不动产买卖、仲介、租赁、管理以及劳务派遣等多领域的建筑综合服务。<br><br>
+        本公司于2024年3月成立，并于5月正式开展不动产翻修承包业务。<br><br>
+        截至2025年2月期，公司实现营业额923万日元，稳步实现业务增长。<br><br>
+        自创立以来，我们始终将客户信赖放在首位，凭借精湛的施工技术与真诚的服务精神，成功完成众多项目。<br>
+        公司以小型至中型项目为主，提供贴近地区需求的灵活响应，并在施工质量、性价比、响应速度等方面建立了完善体系。<br>
+        今后，我们将持续拓展神户及关西全域业务，努力成为“值得信赖的建筑合作伙伴”，积极贡献于地区发展。`,
+        serviceTitle: "主要业务范围",
+        serviceList: [
+          "不动产翻修、室内施工",
+          "建筑相关咨询服务",
+          "材料与设备的销售与出口",
+          "室内设计与装修施工",
+          "房产买卖、仲介、租赁、管理",
+          "劳务派遣与职业介绍"
+        ],
+        contactTitle: "联系方式"
+      },
+      en: {
+        tagline: "Trusted, high-quality construction services from Kobe",
+        aboutTitle: "About Us",
+        aboutText: `Based in Kobe, Meishin Construction Co., Ltd. offers comprehensive construction-related services including housing and real estate renovations, interior and exterior design and construction, building material sales, utility installations, real estate brokerage and management, as well as staffing services.<br><br>
+        The company was established in March 2024, and officially began real estate renovation contracting in May of the same year.<br><br>
+        As of the fiscal year ending February 2025, the company achieved steady growth with annual sales reaching 9.23 million yen.<br><br>
+        Since its inception, we have prioritized building trust with clients, delivering high-quality workmanship and sincere service across every project.<br>
+        We specialize in small to mid-sized contracts, providing regionally-focused, flexible, and responsive service while maintaining excellent standards of quality, cost performance, and efficiency.<br>
+        Moving forward, we aim to expand services throughout the Kansai region, continuing to contribute as a trusted construction partner in local communities.`,
+        serviceTitle: "Main Services",
+        serviceList: [
+          "Real estate and interior renovations",
+          "Construction consulting",
+          "Sales & export of materials and equipment",
+          "Interior design and construction",
+          "Real estate brokerage and management",
+          "Staffing services"
+        ],
+        contactTitle: "Contact Us"
+      }
+    };
+
+    function switchLang(lang) {
+      const t = translations[lang];
+      document.getElementById("tagline").innerText = t.tagline;
+      document.getElementById("aboutTitle").innerText = t.aboutTitle;
+      document.getElementById("aboutText").innerHTML = t.aboutText;
+      document.getElementById("serviceTitle").innerText = t.serviceTitle;
+      document.getElementById("serviceList").innerHTML = t.serviceList.map(item => `<li>${item}</li>`).join("");
+      document.getElementById("contactTitle").innerText = t.contactTitle;
+    }
+
+    VANTA.GLOBE({
+      el: "#vanta-bg",
+      mouseControls: true,
+      touchControls: true,
+      gyroControls: false,
+      minHeight: 200.00,
+      minWidth: 200.00,
+      scale: 1.0,
+      scaleMobile: 1.0,
+      color: 0xffffff,
+      backgroundColor: 0x1a1a2e
+    });
+
+    function toggleMenu() {
+      document.getElementById("navButtons").classList.toggle("active");
+    }
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.section').forEach(section => {
+      observer.observe(section);
+    });
+  </script>
+</body>
+</html>
