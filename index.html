@@ -3,10 +3,12 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>銘神建設株式会社</title>
+  <title>銘神建設株式会社 | Meishin Construction Co., Ltd.</title>
+  <meta name="description" content="銘神建設株式会社公式サイト。神戸を拠点に、リフォーム、内外装設計施工、不動産関連、建築資材販売など幅広い建築サービスを提供しています。" />
+  <meta name="keywords" content="銘神建設株式会社, 神戸, 建設, リフォーム, 内装工事, 不動産, 建築会社" />
 
   <!-- Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@500;700&display=swap" rel="stylesheet">
 
   <!-- Vanta / Three -->
@@ -16,85 +18,362 @@
   <!-- SweetAlert2 -->
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-  <!-- Swiper (carousel) -->
+  <!-- Swiper -->
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 
   <style>
+    * { box-sizing: border-box; }
+
     html, body {
       margin: 0;
       padding: 0;
       font-family: 'Noto Sans JP', sans-serif;
-      height: 100%;
+      min-height: 100%;
       overflow-x: hidden;
-      color: white;
+      color: #fff;
       scroll-behavior: smooth;
       background-color: transparent;
     }
-    html { font-size: clamp(14px, 1.2vw, 18px); }
-    body { line-height: 1.75; }
+
+    html { font-size: clamp(14px, 1.1vw, 18px); }
+    body { line-height: 1.8; }
 
     #vanta-bg {
-      position: fixed; inset: 0;
-      width: 100%; height: 100%;
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
       z-index: -1;
     }
 
-    nav {
-      position: fixed; top: 20px; right: 30px; z-index: 1000;
+    a {
+      color: inherit;
+      text-decoration: none;
     }
-    .nav-toggle { display: none; flex-direction: column; cursor: pointer; }
-    .nav-toggle span {
-      background: white; height: 3px; margin: 4px 0; width: 25px; border-radius: 2px;
-    }
-    .nav-buttons { display: flex; gap: 8px; }
-    nav button {
-      background: rgba(255,255,255,0.9); color: #111; border: none;
-      padding: 8px 14px; border-radius: 4px; font-weight: bold; cursor: pointer;
-      box-shadow: 0 2px 4px rgba(0,0,0,0.3); transition: transform 0.2s ease;
-      font-size: clamp(12px, 1.1vw, 16px);
-    }
-    nav button:hover { background: #003366; color: #fff; transform: scale(1.05); }
 
-    header { text-align: center; padding: 100px 20px 40px; }
-    header img { width: 120px; margin-bottom: 20px; }
-    header h1 { font-family: 'Noto Serif JP', serif; font-size: clamp(28px, 4vw, 42px); margin: 0; }
-    header p { font-size: 1.3em; opacity: 0.9; }
+    .container {
+      width: min(1100px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      z-index: 1000;
+    }
+
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      background: rgba(255,255,255,0.15);
+      backdrop-filter: blur(10px);
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    }
+
+    .nav-toggle span {
+      background: white;
+      height: 3px;
+      margin: 3px 0;
+      width: 24px;
+      border-radius: 2px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: flex-end;
+      max-width: 620px;
+    }
+
+    nav button,
+    nav a.nav-link {
+      background: rgba(255,255,255,0.92);
+      color: #111;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 8px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 3px 8px rgba(0,0,0,0.25);
+      transition: all 0.2s ease;
+      font-size: clamp(12px, 1vw, 15px);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 40px;
+    }
+
+    nav button:hover,
+    nav a.nav-link:hover {
+      background: #003366;
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    header {
+      text-align: center;
+      padding: 110px 20px 48px;
+    }
+
+    header img {
+      width: 120px;
+      max-width: 30vw;
+      margin-bottom: 20px;
+      object-fit: contain;
+    }
+
+    header h1 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(30px, 4vw, 46px);
+      margin: 0 0 8px;
+      letter-spacing: 1px;
+    }
+
+    header p {
+      font-size: clamp(16px, 1.8vw, 24px);
+      opacity: 0.94;
+      margin: 0 auto;
+      max-width: 800px;
+    }
 
     .section {
-      max-width: 900px; margin: 40px auto;
-      background: rgba(255,255,255,0.1); color: #fff;
-      padding: 30px; border-radius: 15px;
+      max-width: 960px;
+      margin: 28px auto;
+      background: rgba(255,255,255,0.12);
+      color: #fff;
+      padding: 30px;
+      border-radius: 18px;
       backdrop-filter: blur(10px);
-      opacity: 0; transform: translateY(40px);
+      box-shadow: 0 10px 28px rgba(0,0,0,0.16);
+      opacity: 0;
+      transform: translateY(36px);
       transition: all 0.8s ease-out;
+      scroll-margin-top: 96px;
     }
-    .section.visible { opacity: 1; transform: translateY(0); }
-    .section h2 { font-family: 'Noto Serif JP', serif; font-size: clamp(20px, 2.5vw, 30px); margin-bottom: 15px; }
 
-    /* Swiper styles */
-    .swiper { width: 100%; }
-    .swiper-slide {
-      display: flex; flex-direction: column; align-items: center; justify-content: center;
+    .section.visible {
+      opacity: 1;
+      transform: translateY(0);
     }
+
+    .section h2 {
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(22px, 2.4vw, 32px);
+      margin: 0 0 16px;
+      line-height: 1.4;
+    }
+
+    .section p,
+    .section li {
+      font-size: 1rem;
+    }
+
+    .section ul {
+      padding-left: 1.2rem;
+      margin: 0;
+    }
+
+    .section li + li {
+      margin-top: 8px;
+    }
+
+    .swiper {
+      width: 100%;
+      padding-bottom: 10px;
+    }
+
+    .swiper-slide {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
     .swiper-slide img {
       width: 100%;
-      max-height: 360px; object-fit: cover; border-radius: 12px;
-      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      max-height: 430px;
+      object-fit: cover;
+      border-radius: 14px;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.28);
+      background: rgba(255,255,255,0.08);
     }
-    .swiper-slide p { margin-top: 10px; opacity: .95; }
+
+    .swiper-slide p {
+      margin: 12px 0 0;
+      opacity: 0.95;
+      text-align: center;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+      margin-top: 10px;
+    }
+
+    .contact-card {
+      background: rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 18px;
+    }
+
+    .contact-card h3 {
+      margin: 0 0 12px;
+      font-size: 1.1rem;
+    }
+
+    .contact-card p {
+      margin: 6px 0;
+      word-break: break-word;
+    }
+
+    .contact-hint {
+      margin-top: 18px;
+      opacity: 0.95;
+    }
+
+    .email-btn {
+      margin-top: 12px;
+      padding: 12px 24px;
+      font-size: 16px;
+      font-weight: 700;
+      border: none;
+      border-radius: 10px;
+      background: #fff;
+      color: #0f2027;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.2);
+      transition: transform 0.2s ease;
+    }
+
+    .email-btn:hover {
+      transform: translateY(-1px);
+    }
+
+    .map-block h2 {
+      margin: 0 0 16px;
+      font-family: 'Noto Serif JP', serif;
+      font-size: clamp(22px, 2.2vw, 30px);
+    }
+
+    .map-frame {
+      width: 100%;
+      height: 400px;
+      border: 0;
+      border-radius: 14px;
+      background: rgba(255,255,255,0.08);
+    }
 
     footer {
-      text-align: center; padding: 30px; font-size: 0.9em;
-      background: rgba(255,255,255,0.1); color: #ffffff; margin-top: 40px;
+      text-align: center;
+      padding: 30px 16px 40px;
+      font-size: 0.95em;
+      background: rgba(255,255,255,0.08);
+      color: #fff;
+      margin-top: 36px;
     }
 
-    @media (max-width: 600px) {
-      .nav-buttons { display: none; flex-direction: column; gap: 10px; margin-top: 10px; }
-      .nav-buttons.active { display: flex; }
-      .nav-toggle { display: flex; }
-      header { padding: 80px 20px 30px; }
-      .section { padding: 20px; }
-      nav button { padding: 10px 12px; }
+    .footer-copy {
+      margin-top: 16px;
+      opacity: 0.9;
+    }
+
+    .to-top {
+      position: fixed;
+      right: 18px;
+      bottom: 20px;
+      z-index: 999;
+      width: 46px;
+      height: 46px;
+      border: none;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.92);
+      color: #111;
+      font-size: 20px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.28);
+      display: none;
+    }
+
+    .to-top.show {
+      display: block;
+    }
+
+    .lang-group {
+      display: flex;
+      gap: 8px;
+      margin-left: 8px;
+    }
+
+    @media (max-width: 820px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 680px) {
+      nav {
+        top: 12px;
+        right: 12px;
+        left: 12px;
+      }
+
+      .nav-toggle {
+        display: flex;
+        width: fit-content;
+        margin-left: auto;
+      }
+
+      .nav-buttons {
+        display: none;
+        flex-direction: column;
+        gap: 10px;
+        margin-top: 10px;
+        align-items: stretch;
+      }
+
+      .nav-buttons.active {
+        display: flex;
+      }
+
+      .lang-group {
+        margin-left: 0;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      nav button,
+      nav a.nav-link {
+        width: 100%;
+      }
+
+      header {
+        padding: 90px 18px 34px;
+      }
+
+      .section {
+        padding: 22px 18px;
+        margin: 20px auto;
+      }
+
+      .swiper-slide img {
+        max-height: 250px;
+      }
+
+      .map-frame {
+        height: 280px;
+      }
+
+      .contact-card p,
+      .contact-hint {
+        font-size: 0.95rem;
+      }
     }
   </style>
 </head>
@@ -105,20 +384,28 @@
     <div class="nav-toggle" onclick="toggleMenu()">
       <span></span><span></span><span></span>
     </div>
+
     <div class="nav-buttons" id="navButtons">
-      <button onclick="switchLang('ja')">日本語</button>
-      <button onclick="switchLang('zh')">中文</button>
-      <button onclick="switchLang('en')">English</button>
+      <a href="#about" class="nav-link" data-nav="about" onclick="closeMenu()">会社概要</a>
+      <a href="#services" class="nav-link" data-nav="services" onclick="closeMenu()">事業内容</a>
+      <a href="#works" class="nav-link" data-nav="works" onclick="closeMenu()">施工事例</a>
+      <a href="#contact" class="nav-link" data-nav="contact" onclick="closeMenu()">お問い合わせ</a>
+
+      <div class="lang-group">
+        <button type="button" onclick="switchLang('ja')">日本語</button>
+        <button type="button" onclick="switchLang('zh')">中文</button>
+        <button type="button" onclick="switchLang('en')">English</button>
+      </div>
     </div>
   </nav>
 
-  <header>
-    <img src="logo.jpg" alt="会社ロゴ" />
+  <header class="container">
+    <img src="logo.jpg" alt="会社ロゴ" onerror="this.style.display='none'" />
     <h1>銘神建設株式会社</h1>
     <p id="tagline">安心・信頼・高品質な建築サービスを神戸から</p>
   </header>
 
-  <div class="section">
+  <div class="section" id="about">
     <h2 id="aboutTitle">会社概要</h2>
     <p id="aboutText">
       銘神建設株式会社は、神戸市を拠点に、住宅・不動産リフォーム、内外装設計施工、建築資材販売、電気・水道工事、不動産売買・仲介・賃貸・管理、労働者派遣事業など、多岐にわたる建設関連サービスを展開しております。<br><br>
@@ -130,7 +417,7 @@
     </p>
   </div>
 
-  <div class="section">
+  <div class="section" id="services">
     <h2 id="serviceTitle">主な事業内容</h2>
     <ul id="serviceList">
       <li>不動産リフォーム・内装工事</li>
@@ -142,99 +429,132 @@
     </ul>
   </div>
 
-  <!-- 施工事例（图片轮播） -->
-  <div class="section">
+  <div class="section" id="works">
     <h2 id="worksTitle">施工事例 - 大阪万博会 巴西館</h2>
+
     <div class="swiper mySwiper">
       <div class="swiper-wrapper">
-        <!-- 根据你目录里的文件名添加的幻灯片 -->
-		<div class="swiper-slide">
-          <img src="photo_2025-08-31_22-36-09.jpg" alt="施工事例: 会場全景"><p>会場全景</p>
-        </div>
-		 <div class="swiper-slide">
-          <img src="photo_2025-08-31_22-36-05.jpg" alt="施工事例: チーム写真"><p>チーム写真</p>
+        <div class="swiper-slide">
+          <img src="photo_2025-08-31_22-36-09.jpg" alt="施工事例 1" loading="lazy" onerror="this.alt='Image not found'; this.style.opacity='0.4';">
+          <p class="work-caption" data-caption-index="0">会場全景</p>
         </div>
         <div class="swiper-slide">
-          <img src="photo_2025-08-31_22-35-40.jpg" alt="施工事例: 展示ブース1"><p>展示ブース 1</p>
+          <img src="photo_2025-08-31_22-36-05.jpg" alt="施工事例 2" loading="lazy" onerror="this.alt='Image not found'; this.style.opacity='0.4';">
+          <p class="work-caption" data-caption-index="1">チーム写真</p>
         </div>
         <div class="swiper-slide">
-          <img src="photo_2025-08-31_22-35-42.jpg" alt="施工事例: 展示ブース2"><p>展示ブース 2</p>
+          <img src="photo_2025-08-31_22-35-40.jpg" alt="施工事例 3" loading="lazy" onerror="this.alt='Image not found'; this.style.opacity='0.4';">
+          <p class="work-caption" data-caption-index="2">展示ブース 1</p>
         </div>
         <div class="swiper-slide">
-          <img src="photo_2025-08-31_22-35-45.jpg" alt="施工事例: パネル説明1"><p>パネル説明 1</p>
+          <img src="photo_2025-08-31_22-35-42.jpg" alt="施工事例 4" loading="lazy" onerror="this.alt='Image not found'; this.style.opacity='0.4';">
+          <p class="work-caption" data-caption-index="3">展示ブース 2</p>
         </div>
         <div class="swiper-slide">
-          <img src="photo_2025-08-31_22-35-48.jpg" alt="施工事例: パネル説明2"><p>パネル説明 2</p>
+          <img src="photo_2025-08-31_22-35-45.jpg" alt="施工事例 5" loading="lazy" onerror="this.alt='Image not found'; this.style.opacity='0.4';">
+          <p class="work-caption" data-caption-index="4">パネル説明 1</p>
         </div>
         <div class="swiper-slide">
-          <img src="photo_2025-08-31_22-35-50.jpg" alt="施工事例: ディスプレイ近景"><p>ディスプレイ近景</p>
+          <img src="photo_2025-08-31_22-35-48.jpg" alt="施工事例 6" loading="lazy" onerror="this.alt='Image not found'; this.style.opacity='0.4';">
+          <p class="work-caption" data-caption-index="5">パネル説明 2</p>
         </div>
         <div class="swiper-slide">
-          <img src="photo_2025-08-31_22-35-54.jpg" alt="施工事例: 展示物近景"><p>展示物 近景</p>
+          <img src="photo_2025-08-31_22-35-50.jpg" alt="施工事例 7" loading="lazy" onerror="this.alt='Image not found'; this.style.opacity='0.4';">
+          <p class="work-caption" data-caption-index="6">ディスプレイ近景</p>
         </div>
         <div class="swiper-slide">
-          <img src="photo_2025-08-31_22-35-57.jpg" alt="施工事例: 展示ライン"><p>展示ライン</p>
+          <img src="photo_2025-08-31_22-35-54.jpg" alt="施工事例 8" loading="lazy" onerror="this.alt='Image not found'; this.style.opacity='0.4';">
+          <p class="work-caption" data-caption-index="7">展示物近景</p>
         </div>
         <div class="swiper-slide">
-          <img src="photo_2025-08-31_22-36-00.jpg" alt="施工事例: ライト"><p>照明</p>
+          <img src="photo_2025-08-31_22-35-57.jpg" alt="施工事例 9" loading="lazy" onerror="this.alt='Image not found'; this.style.opacity='0.4';">
+          <p class="work-caption" data-caption-index="8">展示ライン</p>
         </div>
         <div class="swiper-slide">
-          <img src="photo_2025-08-31_22-36-03.jpg" alt="施工事例: バックヤード"><p>バックヤード</p>
+          <img src="photo_2025-08-31_22-36-00.jpg" alt="施工事例 10" loading="lazy" onerror="this.alt='Image not found'; this.style.opacity='0.4';">
+          <p class="work-caption" data-caption-index="9">照明</p>
         </div>
         <div class="swiper-slide">
-          <img src="photo_2025-08-31_22-35-21.jpg" alt="施工事例: 作業風景1"><p>作業風景 1</p>
+          <img src="photo_2025-08-31_22-36-03.jpg" alt="施工事例 11" loading="lazy" onerror="this.alt='Image not found'; this.style.opacity='0.4';">
+          <p class="work-caption" data-caption-index="10">バックヤード</p>
         </div>
         <div class="swiper-slide">
-          <img src="photo_2025-08-31_22-35-37.jpg" alt="施工事例: 作業風景2"><p>作業風景 2</p>
+          <img src="photo_2025-08-31_22-35-21.jpg" alt="施工事例 12" loading="lazy" onerror="this.alt='Image not found'; this.style.opacity='0.4';">
+          <p class="work-caption" data-caption-index="11">作業風景 1</p>
         </div>
-        
+        <div class="swiper-slide">
+          <img src="photo_2025-08-31_22-35-37.jpg" alt="施工事例 13" loading="lazy" onerror="this.alt='Image not found'; this.style.opacity='0.4';">
+          <p class="work-caption" data-caption-index="12">作業風景 2</p>
+        </div>
       </div>
-      <!-- Swiper UI -->
+
       <div class="swiper-pagination"></div>
       <div class="swiper-button-next"></div>
       <div class="swiper-button-prev"></div>
     </div>
   </div>
 
-  <div class="section">
+  <div class="section" id="contact">
     <h2 id="contactTitle">お問い合わせ</h2>
-    <p>
-      【本社】<br>
-      住所：〒653-0875 兵庫県神戸市長田区丸山町1-6-19<br />
-      電話：078-954-6517 / 080-4498-7896<br />
-      メール：qqzhaofuming@gmail.com<br><br>
-      【神戸支店】<br>
-      住所：〒652-0804 兵庫県神戸市兵庫区中道通4丁目2-33
-    </p>
-    <p style="margin-top:20px;">以下のボタンをクリックして、メールソフトで直接ご連絡ください。</p>
-    <button type="button" onclick="showEmailPopup()" style="margin-top:10px;padding:12px 24px;font-size:16px;font-weight:bold;border:none;border-radius:8px;background:white;color:#0f2027;cursor:pointer;">
+
+    <div class="contact-grid">
+      <div class="contact-card">
+        <h3 id="headOfficeTitle">本社</h3>
+        <p><strong id="addressLabel1">住所：</strong><span id="headOfficeAddress">〒652-0804 兵庫県神戸市兵庫区中道通4丁目2-33</span></p>
+        <p><strong id="phoneLabel">電話：</strong><span id="phoneValue">078-954-6517 / 080-4498-7896</span></p>
+        <p><strong id="emailLabel">メール：</strong><span id="emailValue">qqzhaofuming@gmail.com</span></p>
+      </div>
+    </div>
+
+    <p class="contact-hint" id="contactHint">以下のボタンをクリックして、メールソフトで直接ご連絡ください。</p>
+
+    <button type="button" class="email-btn" onclick="showEmailPopup()" id="emailButtonText">
       メールで問い合わせる
     </button>
   </div>
 
   <footer>
-    <div class="map-block">
-      <h2 style="text-align:center;color:#fff;">アクセスマップ</h2>
-      <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d580.0369646802598!2d135.1646530489101!3d34.67529096431401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60008f738b5979f3%3A0x1ac3ec7fdf98ad22!2z5YWQ56ul55m66YGU5pSv5o-0IOWwj-OBleOBqueZguiCsuWckuOBsuOCiOOBk-OBo-OBkw!5e0!3m2!1szh-CN!2sjp!4v1745551851132!5m2!1szh-CN!2sjp"
-              width="100%" height="400" style="border:0;border-radius:12px;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+    <div class="container">
+      <div class="map-block">
+        <h2 id="mapTitle">アクセスマップ</h2>
+        <iframe
+          class="map-frame"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d580.0369646802598!2d135.1646530489101!3d34.67529096431401!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60008f738b5979f3%3A0x1ac3ec7fdf98ad22!2z5YWQ56ul55m66YGU5pSv5o-0IOWwj-OBleOBqueZguiCsuWckuOBsuOCiOOBk-OBo-OBkw!5e0!3m2!1sja!2sjp!4v1745551851132!5m2!1sja!2sjp"
+          allowfullscreen=""
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+
+      <div class="footer-copy" id="footerText">
+        &copy; 2024 銘神建設株式会社 - Meishin Construction Co., Ltd.
+      </div>
     </div>
-    &copy; 2024 銘神建設株式会社 - Meishin Construction Co., Ltd.
   </footer>
 
-  <!-- Scripts -->
+  <button class="to-top" id="toTopBtn" type="button" onclick="scrollToTop()">↑</button>
+
   <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
   <script>
-    /* 多语言文案 */
     const translations = {
       ja: {
+        pageTitle: "銘神建設株式会社 | Meishin Construction Co., Ltd.",
         tagline: "安心・信頼・高品質な建築サービスを神戸から",
+
+        navAbout: "会社概要",
+        navServices: "事業内容",
+        navWorks: "施工事例",
+        navContact: "お問い合わせ",
+
         aboutTitle: "会社概要",
-        aboutText: `銘神建設株式会社は、神戸市を拠点に、住宅・不動産リフォーム、内外装設計施工、建築資材販売、電気・水道工事など、幅広いサービスを提供しております。<br><br>
+        aboutText: `銘神建設株式会社は、神戸市を拠点に、住宅・不動産リフォーム、内外装設計施工、建築資材販売、電気・水道工事、不動産売買・仲介・賃貸・管理、労働者派遣事業など、多岐にわたる建設関連サービスを展開しております。<br><br>
         会社沿革としては、2024年3月に設立され、同年5月には不動産リフォームの請負業務を本格的にスタートいたしました。<br><br>
         2025年2月期の売上高は923万円を達成し、堅実かつ着実な成長を遂げております。<br><br>
         設立以来、お客様との信頼関係を第一に、質の高い施工技術と誠実な対応で、多くの案件を手がけてまいりました。<br>
-        小規模から中規模の案件を中心に、地域に密着したサービスを展開し、施工品質・コストパフォーマンス・スピード感においてご満足いただける体制を整えております。<br>
+        小規模から中規模の案件を中心に、地域に密着した柔軟かつ迅速な対応を重視し、施工品質・コストパフォーマンス・スピード感においてご満足いただける体制を整えております。<br>
         今後も神戸を中心に関西圏全域へとサービスを拡大し、「信頼される建設パートナー」として地域社会に貢献してまいります。`,
+
         serviceTitle: "主な事業内容",
         serviceList: [
           "不動産リフォーム・内装工事",
@@ -244,120 +564,303 @@
           "不動産売買、仲介、賃貸、管理",
           "労働者派遣事業"
         ],
+
+        worksTitle: "施工事例 - 大阪万博会 巴西館",
+        workCaptions: [
+          "会場全景",
+          "チーム写真",
+          "展示ブース 1",
+          "展示ブース 2",
+          "パネル説明 1",
+          "パネル説明 2",
+          "ディスプレイ近景",
+          "展示物近景",
+          "展示ライン",
+          "照明",
+          "バックヤード",
+          "作業風景 1",
+          "作業風景 2"
+        ],
+
         contactTitle: "お問い合わせ",
-        worksTitle: "施工事例 - 大阪万博会 巴西館"
+        headOfficeTitle: "本社",
+        addressLabel: "住所：",
+        phoneLabel: "電話：",
+        emailLabel: "メール：",
+        contactHint: "以下のボタンをクリックして、メールソフトで直接ご連絡ください。",
+        emailButtonText: "メールで問い合わせる",
+
+        mapTitle: "アクセスマップ",
+        footerText: "&copy; 2024 銘神建設株式会社 - Meishin Construction Co., Ltd.",
+
+        popupTitle: "お問い合わせメール",
+        popupDesc: "メールアドレス：",
+        popupConfirm: "コピー",
+        popupCancel: "閉じる",
+        popupCopied: "コピーしました"
       },
+
       zh: {
+        pageTitle: "铭神建设株式会社 | Meishin Construction Co., Ltd.",
         tagline: "从神户出发，提供安心、信赖、高质量的建筑服务",
+
+        navAbout: "公司简介",
+        navServices: "业务范围",
+        navWorks: "施工案例",
+        navContact: "联系我们",
+
         aboutTitle: "公司简介",
-        aboutText: `銘神建設株式会社以神户市为据点，专注于住宅与不动产翻修、内外装设计施工、建筑材料销售、水电工程、不动产买卖、仲介、租赁、管理以及劳务派遣等多领域的建筑综合服务。<br><br>
-        本公司于2024年3月成立，并于5月正式开展不动产翻修承包业务。<br><br>
-        截至2025年2月期，公司实现营业额923万日元，稳步实现业务增长。<br><br>
-        自创立以来，我们始终将客户信赖放在首位，凭借精湛的施工技术与真诚的服务精神，成功完成众多项目。<br>
-        公司以小型至中型项目为主，提供贴近地区需求的灵活响应，并在施工质量、性价比、响应速度等方面建立了完善体系。<br>
-        今后，我们将持续拓展神户及关西全域业务，努力成为“值得信赖的建筑合作伙伴”，积极贡献于地区发展。`,
+        aboutText: `銘神建設株式会社以神户市为据点，专注于住宅与不动产翻修、内外装设计施工、建筑材料销售、电气与水道工程、不动产买卖、中介、租赁、管理以及劳务派遣等多领域建筑综合服务。<br><br>
+        公司成立于2024年3月，并于同年5月正式开展不动产翻修承包业务。<br><br>
+        截至2025年2月财年，公司实现营业额923万日元，保持稳健增长。<br><br>
+        自创立以来，我们始终将客户信赖放在首位，凭借高质量施工技术与真诚服务，持续完成多个项目。<br>
+        公司以中小型项目为主，重视贴近地区需求的灵活与迅速响应，并在施工质量、性价比与效率方面建立了完善体制。<br>
+        今后，我们将以神户为中心，持续拓展至整个关西地区，努力成为“值得信赖的建筑合作伙伴”，为地区社会作出贡献。`,
+
         serviceTitle: "主要业务范围",
         serviceList: [
-          "不动产翻修、室内施工",
-          "建筑相关咨询服务",
-          "材料与设备的销售与出口",
+          "不动产翻修与室内施工",
+          "建筑咨询服务",
+          "材料与设备销售及出口",
           "室内设计与装修施工",
-          "房产买卖、仲介、租赁、管理",
-          "劳务派遣与职业介绍"
+          "房产买卖、中介、租赁、管理",
+          "劳务派遣业务"
         ],
+
+        worksTitle: "施工案例 - 大阪世博会巴西馆",
+        workCaptions: [
+          "会场全景",
+          "团队合影",
+          "展示区 1",
+          "展示区 2",
+          "展板说明 1",
+          "展板说明 2",
+          "展示近景",
+          "展品近景",
+          "展示动线",
+          "照明效果",
+          "后台区域",
+          "施工场景 1",
+          "施工场景 2"
+        ],
+
         contactTitle: "联系方式",
-        worksTitle: "成功案例 - 大阪世博会 巴西馆"
+        headOfficeTitle: "总部",
+        addressLabel: "地址：",
+        phoneLabel: "电话：",
+        emailLabel: "邮箱：",
+        contactHint: "点击下方按钮，可直接通过邮件软件与我们联系。",
+        emailButtonText: "邮件联系",
+
+        mapTitle: "交通地图",
+        footerText: "&copy; 2024 銘神建設株式会社 - Meishin Construction Co., Ltd.",
+
+        popupTitle: "联系邮箱",
+        popupDesc: "邮箱地址：",
+        popupConfirm: "复制",
+        popupCancel: "关闭",
+        popupCopied: "已复制"
       },
+
       en: {
+        pageTitle: "Meishin Construction Co., Ltd.",
         tagline: "Trusted, high-quality construction services from Kobe",
+
+        navAbout: "About",
+        navServices: "Services",
+        navWorks: "Works",
+        navContact: "Contact",
+
         aboutTitle: "About Us",
-        aboutText: `Based in Kobe, Meishin Construction Co., Ltd. offers comprehensive construction-related services including housing and real estate renovations, interior and exterior design and construction, building material sales, utility installations, real estate brokerage and management, as well as staffing services.<br><br>
-        The company was established in March 2024, and officially began real estate renovation contracting in May of the same year.<br><br>
-        As of the fiscal year ending February 2025, the company achieved steady growth with annual sales reaching 9.23 million yen.<br><br>
-        Since its inception, we have prioritized building trust with clients, delivering high-quality workmanship and sincere service across every project.<br>
-        We specialize in small to mid-sized contracts, providing regionally-focused, flexible, and responsive service while maintaining excellent standards of quality, cost performance, and efficiency.<br>
-        Moving forward, we aim to expand services throughout the Kansai region, continuing to contribute as a trusted construction partner in local communities.`,
+        aboutText: `Based in Kobe, Meishin Construction Co., Ltd. provides a wide range of construction-related services including housing and real estate renovations, interior and exterior design and construction, building material sales, electrical and plumbing work, real estate brokerage, leasing and management, and staffing services.<br><br>
+        The company was established in March 2024 and officially launched its renovation contracting business in May of the same year.<br><br>
+        For the fiscal year ending February 2025, the company recorded sales of 9.23 million yen, showing stable and steady growth. <br><br>
+        Since our founding, we have prioritized trust with every client and delivered projects with high-quality workmanship and sincere service.<br>
+        We mainly handle small to mid-sized projects, emphasizing flexible and responsive local support while maintaining strong standards in quality, cost performance, and speed.<br>
+        Moving forward, we aim to expand across the Kansai region from Kobe and continue contributing to local communities as a trusted construction partner.`,
+
         serviceTitle: "Main Services",
         serviceList: [
-          "Real estate and interior renovations",
+          "Real estate renovation and interior work",
           "Construction consulting",
-          "Sales & export of materials and equipment",
-          "Interior design and construction",
-          "Real estate brokerage and management",
+          "Sales and export of materials and equipment",
+          "Interior design and build",
+          "Real estate sales, brokerage, leasing, and management",
           "Staffing services"
         ],
+
+        worksTitle: "Project Showcase - Expo 2025 Osaka Brazil Pavilion",
+        workCaptions: [
+          "Venue overview",
+          "Team photo",
+          "Exhibition booth 1",
+          "Exhibition booth 2",
+          "Panel display 1",
+          "Panel display 2",
+          "Display close-up",
+          "Exhibit close-up",
+          "Exhibition line",
+          "Lighting",
+          "Backyard area",
+          "Work scene 1",
+          "Work scene 2"
+        ],
+
         contactTitle: "Contact Us",
-        worksTitle: "Our Works - Expo 2025 Osaka Brazil Pavilion"
+        headOfficeTitle: "Head Office",
+        addressLabel: "Address: ",
+        phoneLabel: "Phone: ",
+        emailLabel: "Email: ",
+        contactHint: "Click the button below to contact us directly by email.",
+        emailButtonText: "Contact by Email",
+
+        mapTitle: "Access Map",
+        footerText: "&copy; 2024 Meishin Construction Co., Ltd.",
+
+        popupTitle: "Contact Email",
+        popupDesc: "Email address:",
+        popupConfirm: "Copy",
+        popupCancel: "Close",
+        popupCopied: "Copied"
       }
     };
 
     function switchLang(lang) {
       const t = translations[lang];
       if (!t) return;
+
+      localStorage.setItem("site_lang", lang);
+      document.documentElement.lang = lang;
+      document.title = t.pageTitle;
+
       document.getElementById("tagline").innerText = t.tagline;
+
+      document.querySelector('[data-nav="about"]').innerText = t.navAbout;
+      document.querySelector('[data-nav="services"]').innerText = t.navServices;
+      document.querySelector('[data-nav="works"]').innerText = t.navWorks;
+      document.querySelector('[data-nav="contact"]').innerText = t.navContact;
+
       document.getElementById("aboutTitle").innerText = t.aboutTitle;
       document.getElementById("aboutText").innerHTML = t.aboutText;
+
       document.getElementById("serviceTitle").innerText = t.serviceTitle;
       document.getElementById("serviceList").innerHTML = t.serviceList.map(item => `<li>${item}</li>`).join("");
+
+      document.getElementById("worksTitle").innerText = t.worksTitle;
+      document.querySelectorAll(".work-caption").forEach((el, index) => {
+        el.innerText = t.workCaptions[index] || "";
+      });
+
       document.getElementById("contactTitle").innerText = t.contactTitle;
-      if (document.getElementById("worksTitle")) {
-        document.getElementById("worksTitle").innerText = t.worksTitle;
-      }
+      document.getElementById("headOfficeTitle").innerText = t.headOfficeTitle;
+      document.getElementById("addressLabel1").innerText = t.addressLabel;
+      document.getElementById("phoneLabel").innerText = t.phoneLabel;
+      document.getElementById("emailLabel").innerText = t.emailLabel;
+      document.getElementById("contactHint").innerText = t.contactHint;
+      document.getElementById("emailButtonText").innerText = t.emailButtonText;
+
+      document.getElementById("mapTitle").innerText = t.mapTitle;
+      document.getElementById("footerText").innerHTML = t.footerText;
+
+      closeMenu();
     }
 
-    // Vanta 背景初始化（保持与原页面一致）
+    function toggleMenu() {
+      document.getElementById("navButtons").classList.toggle("active");
+    }
+
+    function closeMenu() {
+      document.getElementById("navButtons").classList.remove("active");
+    }
+
+    function showEmailPopup() {
+      const lang = localStorage.getItem("site_lang") || "ja";
+      const t = translations[lang];
+      const email = "qqzhaofuming@gmail.com";
+
+      Swal.fire({
+        title: t.popupTitle,
+        html: `<p style="margin:0 0 10px">${t.popupDesc}</p>
+               <code style="padding:6px 10px;border-radius:6px;background:rgba(255,255,255,.88);color:#111;display:inline-block">${email}</code>`,
+        confirmButtonText: t.popupConfirm,
+        showCancelButton: true,
+        cancelButtonText: t.popupCancel,
+        background: "rgba(26,26,46,0.96)",
+        color: "#fff"
+      }).then(res => {
+        if (res.isConfirmed) {
+          navigator.clipboard.writeText(email).then(() => {
+            Swal.fire({
+              icon: "success",
+              title: t.popupCopied,
+              timer: 1200,
+              showConfirmButton: false,
+              background: "rgba(26,26,46,0.96)",
+              color: "#fff"
+            });
+          });
+        }
+      });
+    }
+
+    function scrollToTop() {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    window.addEventListener("scroll", () => {
+      const btn = document.getElementById("toTopBtn");
+      if (window.scrollY > 260) {
+        btn.classList.add("show");
+      } else {
+        btn.classList.remove("show");
+      }
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach(link => {
+      link.addEventListener("click", () => closeMenu());
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll(".section").forEach(section => observer.observe(section));
+
     VANTA.GLOBE({
       el: "#vanta-bg",
       mouseControls: true,
       touchControls: true,
       gyroControls: false,
-      minHeight: 200.00,
-      minWidth: 200.00,
+      minHeight: 200.0,
+      minWidth: 200.0,
       scale: 1.0,
       scaleMobile: 1.0,
       color: 0xffffff,
       backgroundColor: 0x1a1a2e
     });
 
-    // Swiper 轮播
     const swiper = new Swiper(".mySwiper", {
       loop: true,
-      autoplay: { delay: 3000, disableOnInteraction: false },
-      pagination: { el: ".swiper-pagination", clickable: true },
-      navigation: { nextEl: ".swiper-button-next", prevEl: ".swiper-button-prev" }
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false
+      },
+      pagination: {
+        el: ".swiper-pagination",
+        clickable: true
+      },
+      navigation: {
+        nextEl: ".swiper-button-next",
+        prevEl: ".swiper-button-prev"
+      }
     });
 
-    // 菜单
-    function toggleMenu() {
-      document.getElementById("navButtons").classList.toggle("active");
-    }
-
-    // 滚动渐显
-    const observer = new IntersectionObserver((entries) => {
-      entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
-    }, { threshold: 0.1 });
-    document.querySelectorAll('.section').forEach(section => observer.observe(section));
-
-    // 邮件弹窗 & 复制
-    function showEmailPopup() {
-      const email = "qqzhaofuming@gmail.com";
-      Swal.fire({
-        title: 'お問い合わせメール',
-        html: `<p style="margin:0 0 10px">メールアドレス：</p>
-               <code style="padding:6px 10px;border-radius:6px;background:rgba(255,255,255,.85);color:#111;display:inline-block">${email}</code>`,
-        confirmButtonText: 'コピー',
-        showCancelButton: true,
-        cancelButtonText: '閉じる',
-        background: 'rgba(26,26,46,0.95)',
-        color: '#fff'
-      }).then(res => {
-        if (res.isConfirmed) {
-          navigator.clipboard.writeText(email).then(() => {
-            Swal.fire({ icon: 'success', title: 'コピーしました', timer: 1200, showConfirmButton: false });
-          });
-        }
-      });
-    }
+    const savedLang = localStorage.getItem("site_lang") || "ja";
+    switchLang(savedLang);
   </script>
 </body>
 </html>
